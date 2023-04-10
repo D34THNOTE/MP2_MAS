@@ -51,6 +51,8 @@ public class Painting {
     }
 
     public void setPaintingName(String paintingName) {
+        if(paintingName == null || paintingName.isBlank()) throw new IllegalArgumentException("Painting's name is required");
+
         this.paintingName = paintingName;
     }
 
@@ -59,6 +61,8 @@ public class Painting {
     }
 
     public void setArtistName(String artistName) {
+        if(artistName == null || artistName.isBlank()) throw new IllegalArgumentException("Artist's name is required");
+
         this.artistName = artistName;
     }
 

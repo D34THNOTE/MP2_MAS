@@ -1,5 +1,7 @@
 package models.basic;
 
+import models.basic.Gallery;
+import models.basic.Painting;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +37,18 @@ public class BasicAssociationTest {
         assertThrows(IllegalArgumentException.class, () -> gallery1.addPainting(painting1));
 
         assertEquals(gallery1, painting1.getGallery());
+
+        gallery1.addPainting(painting2);
+        assertTrue(gallery1.getPaintings().contains(painting2));
+        assertEquals(2, gallery1.getPaintings().size());
+
+        Painting tempPainting = painting2;
+        painting2 = new Painting("Replacement painting", "Me", 65.00);
+        gallery1.removePainting(tempPainting);
+        gallery1.addPainting(painting2);
+        assertTrue(gallery1.getPaintings().contains(painting2));
+        assertEquals(2, gallery1.getPaintings().size());
+        assertFalse(gallery1.getPaintings().contains(tempPainting));
     }
 
     @Test
@@ -46,9 +60,14 @@ public class BasicAssociationTest {
         assertTrue(gallery1.getPaintings().contains(painting1));
 
         gallery1.removePainting(painting1);
-
         assertFalse(gallery1.getPaintings().contains(painting1));
         assertNull(painting1.getGallery());
+
+        gallery1.addPainting(painting1);
+        gallery1.addPainting(painting2);
+        assertEquals(2, gallery1.getPaintings().size());
+        gallery1.removePainting(painting1);
+        assertEquals(1, gallery1.getPaintings().size());
     }
 
     @Test
@@ -67,6 +86,10 @@ public class BasicAssociationTest {
         painting1.setGallery(gallery2);
         assertEquals(gallery2, painting1.getGallery());
         assertFalse(gallery1.getPaintings().contains(painting1));
+        assertTrue(gallery2.getPaintings().contains(painting1));
+
+        painting2.setGallery(gallery2);
+        assertTrue(gallery2.getPaintings().contains(painting2));
         assertTrue(gallery2.getPaintings().contains(painting1));
     }
 }
