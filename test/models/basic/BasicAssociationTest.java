@@ -35,7 +35,6 @@ public class BasicAssociationTest {
         gallery1.addPainting(painting1);
         assertTrue(gallery1.getPaintings().contains(painting1));
         assertThrows(IllegalArgumentException.class, () -> gallery1.addPainting(painting1));
-
         assertEquals(gallery1, painting1.getGallery());
 
         gallery1.addPainting(painting2);
