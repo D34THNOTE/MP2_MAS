@@ -38,6 +38,7 @@ public class Bank {
     }
 
     public void setBankName(String bankName) {
+        if(bankName == null || bankName.isBlank()) throw new IllegalArgumentException("Bank's name is required");
         this.bankName = bankName;
     }
 }
