@@ -13,7 +13,7 @@ public class Task {
 
     public Task(String taskName, Project project) {
         setTaskName(taskName);
-        this.project = project;
+        setProject(project);
     }
 
     public Task(String taskName, String taskDescription, Project project) {
@@ -29,6 +29,12 @@ public class Task {
 //    public static Set<Task> getExtent() {
 //        return Collections.unmodifiableSet(extent);
 //    }
+
+    private void setProject(Project project) {
+        if(project == null) throw new IllegalArgumentException("Project is required to create a task");
+
+        this.project = project;
+    }
 
     public Project getProject() {
         return project;

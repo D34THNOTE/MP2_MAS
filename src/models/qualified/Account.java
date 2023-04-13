@@ -6,7 +6,7 @@ public class Account {
     private long accountNumber;
     private double Balance;
 
-    Bank bank;
+    private Bank bank;
 
     public Account(long accountNumber, double balance) {
         this.accountNumber = accountNumber;
