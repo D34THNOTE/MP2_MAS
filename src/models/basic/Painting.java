@@ -73,4 +73,14 @@ public class Painting {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Painting{" +
+                "paintingName='" + paintingName + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", price=" + price +
+                ", gallery=" + gallery +
+                '}';
+    }
 }

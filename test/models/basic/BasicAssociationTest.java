@@ -48,6 +48,13 @@ public class BasicAssociationTest {
         assertTrue(gallery1.getPaintings().contains(painting2));
         assertEquals(2, gallery1.getPaintings().size());
         assertFalse(gallery1.getPaintings().contains(tempPainting));
+
+        // adding a painting to a new gallery without removing it from the old one
+        gallery2.addPainting(painting1);
+        assertFalse(gallery1.getPaintings().contains(painting1));
+        assertTrue(gallery2.getPaintings().contains(painting1));
+        assertEquals(1, gallery1.getPaintings().size());
+        assertEquals(1, gallery2.getPaintings().size());
     }
 
     @Test
@@ -81,6 +88,7 @@ public class BasicAssociationTest {
         assertNull(painting1.getGallery());
         assertFalse(gallery1.getPaintings().contains(painting1));
 
+        // adding a painting to a new gallery without removing it from the old one
         painting1.setGallery(gallery1);
         painting1.setGallery(gallery2);
         assertEquals(gallery2, painting1.getGallery());

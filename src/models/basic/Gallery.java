@@ -20,7 +20,7 @@ public class Gallery {
         if(paintings.contains(painting)) throw new IllegalArgumentException("Passed painting already exists in this gallery");
 
         paintings.add(painting);
-        painting.setGallery(this); // back reference
+        painting.setGallery(this); // back reference is handled here, hence no checks for if painting.getGallery() isn't null or anything like such
     }
 
     public void removePainting(Painting painting) {

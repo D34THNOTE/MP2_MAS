@@ -19,7 +19,7 @@ public class Task {
     public Task(String taskName, String taskDescription, Project project) {
         setTaskName(taskName);
         setTaskDescription(taskDescription);
-        this.project = project;
+        setProject(project);
     }
 
     public void remove() {

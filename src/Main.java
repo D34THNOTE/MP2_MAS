@@ -1,10 +1,32 @@
 import models.attribute.Course;
 import models.attribute.Enrollment;
 import models.attribute.Student;
+import models.basic.Gallery;
+import models.basic.Painting;
 
 public class Main {
     public static void main(String[] args) {
 
+        // Basic association
+        Gallery gallery1 = new Gallery("Fantastic Art", "Krawiecka 74 Warszawa 06-965");
+        Gallery gallery2 = new Gallery("Horrible Art", "Norblina 23a Warszawa 03-684");
+        Painting painting1 = new Painting("P1", "Pinokio" ,34.00);
+        Painting painting2 = new Painting("P2", "Fistashio" ,344.00);
+
+        gallery1.addPainting(painting1);
+        painting2.setGallery(gallery1);
+
+        System.out.println(gallery1.getPaintings());
+
+        gallery2.addPainting(painting1);
+        System.out.println(gallery1.getPaintings());
+        System.out.println(gallery2.getPaintings());
+
+
+
+
+
+        System.out.println();
         // Association with attribute
         Student student1 = new Student("Mark", "Twain");
         Course course1 = new Course("Computers");
@@ -21,5 +43,7 @@ public class Main {
         student1.removeEnrollmentStudent(enrollment1);
         System.out.println(student1.getEnrollments());
         System.out.println(student2.getEnrollments());
+
+        System.out.println();
     }
 }
