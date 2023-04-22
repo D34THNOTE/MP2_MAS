@@ -1,6 +1,5 @@
 package models.attribute;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,17 +12,14 @@ public class Enrollment {
     private Course course;
 
 
-
     public Enrollment(Student student, Course course) {
+        if(student == null || course == null) throw new IllegalArgumentException("At least one of the arguments for Enrollment was null");
 
         if(isUnique(student, course)) {
             this.student = student;
             this.course = course;
-//            setStartDate(startDate);
-//            setEndDate(endDate);
 
             addEnrollment(this);
-            extent.add(this);
         } else {
             throw new IllegalArgumentException("Pair isn't unique");
         }
@@ -34,6 +30,8 @@ public class Enrollment {
     }
 
     public static void addEnrollment(Enrollment enrollment) {
+        if(enrollment == null) throw new IllegalArgumentException("Enrollment to be added cannot be empty");
+
         if(enrollment.isUnique(enrollment.student, enrollment.course)) {
             extent.add(enrollment);
         }
@@ -59,16 +57,15 @@ public class Enrollment {
     }
 
     private boolean isUnique(Student student, Course course) {
-        boolean unique = true;
+        if(student == null || course == null) throw new IllegalArgumentException("At least one of the arguments for Enrollment was null");
 
         for(Enrollment possibleDuplicate : extent) {
             if (possibleDuplicate.student == student && possibleDuplicate.course == course) {
-                unique = false;
-                break;
+                return false;
             }
         }
 
-        return unique;
+        return true;
     }
 
     public Student getStudent() {
@@ -78,26 +75,4 @@ public class Enrollment {
     public Course getCourse() {
         return course;
     }
-
-//    public LocalDate getStartDate() {
-//        return startDate;
-//    }
-//
-//    public void setStartDate(LocalDate startDate) {
-//        if (startDate == null) throw new IllegalArgumentException("Start date is required");
-//        if (startDate.isBefore(LocalDate.now())) throw new IllegalArgumentException("Start date cannot be a date before the current moment");
-//
-//        this.startDate = startDate;
-//    }
-//
-//    public LocalDate getEndDate() {
-//        return endDate;
-//    }
-//
-//    public void setEndDate(LocalDate endDate) {
-//        if (endDate == null) throw new IllegalArgumentException("End date is required");
-//        if (endDate.isBefore(LocalDate.now())) throw new IllegalArgumentException("End date cannot be a date before the current moment");
-//
-//        this.endDate = endDate;
-//    }
 }

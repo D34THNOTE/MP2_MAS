@@ -16,6 +16,7 @@ public class Student {
 
     public void addEnrollmentStudent(Enrollment enrollment) {
         if(enrollment == null) throw new IllegalArgumentException("Passed enrollment cannot be null");
+        if(enrollment.getStudent() != this) throw new IllegalArgumentException("Chosen Enrollment doesn't contain this student");
         if(enrollments.contains(enrollment)) throw new IllegalArgumentException("Passed enrollment already exists for this student");
 
         enrollments.add(enrollment);
@@ -24,10 +25,12 @@ public class Student {
 
     public void removeEnrollmentStudent(Enrollment enrollment) {
         if(enrollment == null) throw new IllegalArgumentException("Passed enrollment cannot be null");
+        if(enrollment.getStudent() != this) throw new IllegalArgumentException("Chosen Enrollment doesn't contain this student");
+        // check if the enrollment belongs to this student
+        if(!enrollments.contains(enrollment)) throw new IllegalArgumentException("Chosen enrollment doesn't belong to this student");
 
-        if(enrollments.contains(enrollment)) {
-            enrollments.remove(enrollment);
-        }
+        // we don't check if this enrollment is in "enrollments" because if it isn't simply nothing will happen
+        enrollments.remove(enrollment);
         if(Enrollment.getExtent().contains(enrollment)) {
             enrollment.remove();
         }
