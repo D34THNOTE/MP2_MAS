@@ -3,6 +3,7 @@ import models.attribute.Enrollment;
 import models.attribute.Student;
 import models.basic.Gallery;
 import models.basic.Painting;
+import models.composition.Project;
 import models.qualified.Car;
 import models.qualified.Garage;
 
@@ -68,6 +69,13 @@ public class Main {
 
         System.out.println();
         // Composition
+        Project project1 = new Project("Fun park");
 
+        project1.addTask("Invent name");
+        project1.addTask("Create the part", "The park should be big and fun and cheap to make but also well made");
+        System.out.println(project1);
+
+        project1.removeTask(project1.getTasks().get(0));
+        System.out.println(project1);
     }
 }

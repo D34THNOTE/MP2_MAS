@@ -5,11 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Task {
-    //private static Set<Task> extent = new HashSet<>();
-
     private String taskName, taskDescription;
 
-    Project project;
+    private Project project;
 
     public Task(String taskName, Project project) {
         setTaskName(taskName);
@@ -23,15 +21,14 @@ public class Task {
     }
 
     public void remove() {
+        if(project.getTasks().contains(this)) project.removeTask(this);
+
         project = null;
     }
 
-//    public static Set<Task> getExtent() {
-//        return Collections.unmodifiableSet(extent);
-//    }
-
     private void setProject(Project project) {
         if(project == null) throw new IllegalArgumentException("Project is required to create a task");
+        if(!Project.getExtent().contains(project)) throw new IllegalArgumentException("Selected project is deactivated");
 
         this.project = project;
     }
@@ -58,5 +55,13 @@ public class Task {
         if(taskDescription != null && taskDescription.isBlank()) throw new IllegalArgumentException("Entered task description is empty");
 
         this.taskDescription = taskDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskName='" + taskName + '\'' +
+                (taskDescription == null ? "" : ", taskDescription='" + taskDescription + '\'')  +
+                '}';
     }
 }

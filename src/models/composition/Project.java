@@ -13,7 +13,6 @@ public class Project {
     }
 
     public void addTask(String taskName) {
-        //TODO write a test for this
         if(!extent.contains(this)) throw new IllegalStateException("This project has been deactivated");
 
         tasks.add(new Task(taskName, this));
@@ -30,16 +29,18 @@ public class Project {
         if(task == null) throw new IllegalArgumentException("Chosen task is null");
         if(!tasks.contains(task)) throw new IllegalArgumentException("Chosen task doesn't exist in this project");
 
-        task.remove();
         tasks.remove(task);
+        task.remove();
     }
 
     public static void removeProject(Project project) {
         if(project == null) throw new IllegalArgumentException("Chosen project is null");
         if(!extent.contains(project)) throw new IllegalArgumentException("Chosen project doesn't exist in the extent");
 
-        project.tasks.forEach(Task::remove);
-        project.tasks.clear();
+        if(!project.tasks.isEmpty()) {
+            for(int i=0; i < project.tasks.size(); i++) project.tasks.get(i).remove();
+            project.tasks.clear();
+        }
 
         extent.remove(project);
     }
@@ -60,5 +61,13 @@ public class Project {
         if(projectName == null || projectName.isBlank()) throw new IllegalArgumentException("Project's name is required");
 
         this.projectName = projectName;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "tasks=" + tasks +
+                ", projectName='" + projectName + '\'' +
+                '}';
     }
 }
