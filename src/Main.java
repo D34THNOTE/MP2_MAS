@@ -3,6 +3,8 @@ import models.attribute.Enrollment;
 import models.attribute.Student;
 import models.basic.Gallery;
 import models.basic.Painting;
+import models.qualified.Car;
+import models.qualified.Garage;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,6 +46,28 @@ public class Main {
         System.out.println(student1.getEnrollments());
         System.out.println(student2.getEnrollments());
 
+
+
         System.out.println();
+        // Qualified association
+        Garage garage1 = new Garage("Carzz", "Warszawa ul.Cybernetyczna 24");
+
+        Car car1 = new Car("213353B23", "Skoda Octavia");
+        Car car2 = new Car("A23534349", "Opel Astra");
+
+        System.out.println(garage1.getCars());
+        garage1.addCar(car1);
+        garage1.addCar(car2);
+        System.out.println(garage1.getCars());
+
+        garage1.removeCarById(car1.getLicensePlate());
+        System.out.println(garage1.getCars());
+
+
+
+
+        System.out.println();
+        // Composition
+
     }
 }

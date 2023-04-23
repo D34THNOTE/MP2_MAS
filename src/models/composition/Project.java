@@ -13,11 +13,16 @@ public class Project {
     }
 
     public void addTask(String taskName) {
+        //TODO write a test for this
+        if(!extent.contains(this)) throw new IllegalStateException("This project has been deactivated");
+
         tasks.add(new Task(taskName, this));
     }
 
     // overloading because taskDescription is optional
     public void addTask(String taskName, String taskDescription) {
+        if(!extent.contains(this)) throw new IllegalStateException("This project has been deactivated");
+
         tasks.add(new Task(taskName, taskDescription, this));
     }
 
